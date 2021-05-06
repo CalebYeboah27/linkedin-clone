@@ -1,6 +1,7 @@
 body {
   overflow-y: scroll;
   overflow-x: hidden;
+  font-family: Arial, sans-serif;
 }
 
 :root,
@@ -35,8 +36,4 @@ ul {
   font-size: 100%;
   vertical-align: baseline;
   background: transparent;
-}
-
-body {
-  font-family: Arial, sans-serif;
 }
