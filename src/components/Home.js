@@ -1,25 +1,27 @@
 import styled from "styled-components";
 import LeftSide from "./LeftSide";
-import RightSide from "./RightSide";
 import Main from "./Main";
+import RightSide from "./RightSide";
 
 const Home = () => {
   return (
     <Container>
-      <Section>
-        <h5>
-          <button>Hiring in a hurry - </button>
-          <p>
-            Find talented pros in record time with upwor and keep business
-            moving
-          </p>
-        </h5>
-      </Section>
-      <Layout>
-        <LeftSide />
-        <Main />
-        <RightSide />
-      </Layout>
+      <Content>
+        <Section>
+          <h5>
+            <button>Hiring in a hurry - </button>
+            <p>
+              Find talented pros in record time with upwork and keep business
+              moving
+            </p>
+          </h5>
+        </Section>
+        <Layout>
+          <LeftSide />
+          <Main />
+          <RightSide />
+        </Layout>
+      </Content>
     </Container>
   );
 };
@@ -44,10 +46,10 @@ const Section = styled.section`
   display: flex;
   justify-content: center;
   h5 {
-    color: #0a66c2;
     font-size: 14px;
     button {
       font-weight: 700;
+      color: #0a66c2;
       border: none;
       text-decoration: underline;
       background-color: transparent;

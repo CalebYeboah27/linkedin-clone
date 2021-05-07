@@ -3,7 +3,48 @@ import styled from "styled-components";
 const LeftSide = () => {
   return (
     <Container>
-      <h2>Left Side</h2>
+      <ArtCard>
+        <UserInfo>
+          <CardBackground />
+          <a>
+            <Photo />
+            <Link>Welcome, there!</Link>
+            <AddPhotoText>Add a photo</AddPhotoText>
+          </a>
+        </UserInfo>
+        <Widget>
+          <a>
+            <div>
+              <span>Connections</span>
+              <span>Grow your network</span>
+            </div>
+            <img src="/images/widget-icon.svg" alt="" />
+          </a>
+        </Widget>
+        <Item>
+          <span>
+            <img src="/images/item-icon.svg" alt="" />
+            My Items
+          </span>
+        </Item>
+      </ArtCard>
+      <CommunityCard>
+        <a>
+          <span>Groups</span>
+        </a>
+        <a>
+          <span>
+            Events
+            <img src="/images/plus-icon.svg" alt="" />
+          </span>
+        </a>
+        <a>
+          <span>Follow Hashtags</span>
+        </a>
+        <a>
+          <span>Discover more</span>
+        </a>
+      </CommunityCard>
     </Container>
   );
 };
@@ -74,7 +115,11 @@ const Widget = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   padding-top: 12px;
   padding-bottom: 12px;
+
   & > a {
+    color: inherit;
+    border: none;
+    background-color: transparent;
     text-decoration: none;
     display: flex;
     justify-content: space-between;
