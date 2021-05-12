@@ -15,7 +15,7 @@ const Login = (props) => {
           </Link>
           <div>
             <Join>Join now</Join>
-            <SignIn>Sign In</SignIn>
+            <SignIn onClick={() => props.signIn()}>Sign In</SignIn>
           </div>
         </Nav>
         <Section>

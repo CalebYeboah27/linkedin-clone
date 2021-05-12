@@ -1,9 +1,15 @@
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { getUserAuth, signInAPI } from "../actions";
+import { Redirect } from "react-router";
+import { signOutAPI } from "../actions";
 
-const Header = () => {
+const Header = (props) => {
+  console.log(props);
   return (
     <Container>
+      {!props.user && <Redirect to="/" />}
       <Content>
         <Logo>
           <Link to="/home">
@@ -21,54 +27,64 @@ const Header = () => {
         <Nav>
           <NavListWrap>
             <NavList className="active">
-              <button to="/home" className="a">
+              <a>
                 <img src="/images/nav-home.svg" alt="" />
                 <span>Home</span>
-              </button>
+              </a>
             </NavList>
             <NavList>
-              <button to="/home" className="a">
+              <a>
                 <img src="/images/nav-network.svg" alt="" />
                 <span>Network</span>
-              </button>
+              </a>
             </NavList>
             <NavList>
-              <button to="/home" className="a">
+              <a>
                 <img src="/images/nav-jobs.svg" alt="" />
                 <span>Jobs</span>
-              </button>
+              </a>
             </NavList>
             <NavList>
-              <button to="/home" className="a">
+              <a>
                 <img src="/images/nav-messaging.svg" alt="" />
                 <span>Messaging</span>
-              </button>
+              </a>
             </NavList>
             <NavList>
-              <button to="/home" className="a">
+              <a>
                 <img src="/images/nav-notifications.svg" alt="" />
                 <span>Notifications</span>
-              </button>
+              </a>
             </NavList>
             <User>
-              <button to="" className="a">
-                <img src="/images/user.svg" alt="" />
-                <span>Me</span>
-                <img src="/images/down-icon.svg" alt="" />
-              </button>
-              <SignOut>
-                <button to="" className="a">
-                  Sign Out
-                </button>
-              </SignOut>
+              <a>
+                {props.user && props.user.photoURL ? (
+                  <img src={props.user.photoURL} alt="" />
+                ) : (
+                  <img src="/images/user.svg" alt="" />
+                )}
+                <span>
+                  Me
+                  <img src="/images/down-icon.svg" alt="" />
+                </span>
+              </a>
+              {props.user ? (
+                <SignOut onClick={() => props.signOut()}>
+                  <a>Sign Out</a>
+                </SignOut>
+              ) : (
+                <SignIn onClick={() => props.signIn()}>
+                  <a>Sign In</a>
+                </SignIn>
+              )}
             </User>
             <Work>
-              <button to="" className="a">
+              <a>
                 <img src="/images/nav-work.svg" alt="" />
                 <span>
-                  Work <img src="/images/down-icon.svg" alt="" />{" "}
+                  Work <img src="/images/down-icon.svg" alt="" />
                 </span>
-              </button>
+              </a>
             </Work>
           </NavListWrap>
         </Nav>
@@ -174,7 +190,7 @@ const NavList = styled.li`
   display: flex;
   align-items: center;
   .a,
-  button {
+  a {
     align-items: center;
     background: transparent;
     display: flex;
@@ -200,7 +216,7 @@ const NavList = styled.li`
   }
   &:hover,
   &:active {
-    button {
+    a {
       span {
         color: rgba(0, 0, 0, 0.9);
       }
@@ -220,13 +236,25 @@ const SignOut = styled.div`
   text-align: center;
   display: none;
 `;
+const SignIn = styled.div`
+  position: absolute;
+  top: 45px;
+  background: white;
+  border-radius: 0 0 5px 5px;
+  width: 100px;
+  height: 40px;
+  font-size: 16px;
+  transition-duration: 167ms;
+  text-align: center;
+  display: none;
+`;
 
 const User = styled(NavList)`
-  button > svg {
+  a > svg {
     width: 24px;
     border-radius: 50%;
   }
-  button > img {
+  a > img {
     width: 24px;
     height: 24px;
     border-radius: 50%;
@@ -241,10 +269,20 @@ const User = styled(NavList)`
       display: flex;
       justify-content: center;
     }
+    ${SignIn} {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
   }
   @media (max-width: 768px) {
     &:hover {
       ${SignOut} {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+      }
+      ${SignIn} {
         align-items: center;
         display: flex;
         justify-content: center;
@@ -257,4 +295,15 @@ const Work = styled(User)`
   border-left: 1px solid rgba(0, 0, 0, 0.08);
 `;
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  signOut: () => dispatch(signOutAPI()),
+  signIn: () => dispatch(signInAPI()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

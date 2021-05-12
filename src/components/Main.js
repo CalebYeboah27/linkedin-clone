@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import PostModal from "./PostModal";
 
 const Main = () => {
   return (
@@ -95,6 +96,7 @@ const Main = () => {
           </SocialActions>
         </Article>
       </div>
+      <PostModal />
     </Container>
   );
 };
@@ -139,7 +141,7 @@ const ShareBox = styled(CommonCard)`
       padding: 8px 16px 0px 16px;
       img {
         width: 48px;
-        border-radius: 40%;
+        border-radius: 50%;
         margin-right: 8px;
       }
       button {
