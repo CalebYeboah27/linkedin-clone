@@ -4,13 +4,14 @@ import Login from "./components/Login";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import { useEffect } from "react";
-import { getUserAuth, signInAPI } from "./actions";
+import { getUserAuth } from "./actions";
 import { connect } from "react-redux";
 
 function App(props) {
+  const { getUserAuth } = props;
   useEffect(() => {
-    props.getUserAuth();
-  }, []);
+    getUserAuth();
+  });
   return (
     <div className="App">
       <Router>
@@ -33,7 +34,6 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => ({
   getUserAuth: () => dispatch(getUserAuth()),
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

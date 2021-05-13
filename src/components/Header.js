@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { getUserAuth, signInAPI } from "../actions";
+import { signInAPI } from "../actions";
 import { Redirect } from "react-router";
 import { signOutAPI } from "../actions";
 
